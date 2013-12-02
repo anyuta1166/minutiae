@@ -20,8 +20,6 @@ function Minutiae:OnInitialize()
 			bind = false,
 			nameplates = false,
 			gossip = false,
-			includedItems = {},
-			excludedItems = {},
 			startup = false,
 			bank = false,
 			lootbop = false,
@@ -107,43 +105,6 @@ function Minutiae:OnEnable()
 					order = 6,
 					type = 'description',
 					name = 'When checked, Minutiae automatically grey (junk) quality items.'
-				},
-				inclusions = {
-					order = 7,
-					type = 'group',
-					handler = Minutiae,
-					name = 'Inclusions',
-					disabled = true,
-					args = self.db.global.includedItems
-				},
-				exclusions = {
-					order = 8,
-					type = 'group',
-					handler = Minutiae,
-					name = 'Exclusions',
-					disabled = true,
-					args = self.db.global.excludedItems
-				},
-				enterItem = {
-					order = 9,
-					name = "Enter Item:",
-					type = 'input',
-					disabled = true,
-					set = "AddInclusions"
-				},
-				addItem = {
-					order = 10,
-					name = 'Add Item',
-					type = 'execute',
-					disabled = true,
-					func = "AddInclusions"
-				},
-				removeItem = {
-					order = 11,
-					name = 'Remove Item',
-					type = 'execute',
-					disabled = true,
-					func = "AddExclusions"
 				}
 			}
 		},
@@ -412,14 +373,6 @@ function Minutiae:OnEnable()
 	if self.db.global.startup then
 		self:Print("v"..MinutiaeVersion.." Loaded.")
 	end
-end
-
-function Minutiae:AddInclusions()
-	
-end
-
-function Minutiae:AddExclusions()
-	
 end
 
 function Minutiae:Set(arg, value)
