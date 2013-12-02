@@ -13,7 +13,7 @@
 #@no-lib-strip@
 ## X-Embeds: LibDataBroker-1.1, LibDBIcon-1.0, Ace3, LibAbacus-3.0, CallbackHandler-1.0
 libs\LibStub\LibStub.lua
-libs\CallbackHandler-1.0\CallbackHandler-1.0\CallbackHandler-1.0.xml
+libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
 libs\AceAddon-3.0\AceAddon-3.0.xml
 libs\AceEvent-3.0\AceEvent-3.0.xml
 libs\AceDB-3.0\AceDB-3.0.xml
