@@ -1,0 +1,43 @@
+﻿## Interface: 40300
+## Title: Minutiae
+## Notes: An Ace3 mod to automate common activities.  Inspired by the Ace2 mod Automaton - credit weab and gxxam.
+## Author: InSo(v)nIaX
+## Version: 1.0
+## OptionalDeps: Ace3, CallbackHandler-1.0, LibDataBroker-1.1, LibDBIcon-1.0, LibAbacus-3.0
+## SavedVariables: MinutiaeDB
+## X-Curse-Packaged-Version: v1.0
+## X-Curse-Project-Name: Minutiae (Automation)
+## X-Curse-Project-ID: minutiae
+## X-Curse-Repository-ID: wow/minutiae/mainline
+
+#@no-lib-strip@
+## X-Embeds: LibDataBroker-1.1, LibDBIcon-1.0, Ace3, LibAbacus-3.0, CallbackHandler-1.0
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0\CallbackHandler-1.0.xml
+libs\AceAddon-3.0\AceAddon-3.0.xml
+libs\AceEvent-3.0\AceEvent-3.0.xml
+libs\AceDB-3.0\AceDB-3.0.xml
+libs\AceConsole-3.0\AceConsole-3.0.xml
+libs\AceGUI-3.0\AceGUI-3.0.xml
+libs\AceConfig-3.0\AceConfig-3.0.xml
+libs\LibAbacus-3.0\lib.xml
+#@end-no-lib-strip@
+
+libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+
+#@no-lib-strip@
+libs\LibDBIcon-1.0\LibDBIcon-1.0\LibDBIcon-1.0.lua
+#@end-no-lib-strip@
+
+Minutiae.lua
+Modules\Repair.lua
+Modules\Sell.lua
+Modules\Release.lua
+Modules\Resurrect.lua
+Modules\Quest.lua
+Modules\Invite.lua
+Modules\Duel.lua
+Modules\Bind.lua
+Modules\Nameplates.lua
+Modules\Summon.lua
+Modules\Gossip.lua
