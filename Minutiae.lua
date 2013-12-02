@@ -9,20 +9,26 @@ function Minutiae:OnInitialize()
 		minimap = {
 			hide = true},
 			repair = true,
-			repairSelfless = true,
+			repairSelfless = false,
 			release = false,
 			sell = true,
 			resurrect = false,
 			summon = false,
 			quest = false,
-			invite = true,
+			invite = false,
 			duel = false,
 			bind = false,
-			nameplates = true,
+			nameplates = false,
 			gossip = false,
 			includedItems = {},
 			excludedItems = {},
-			startup = true
+			startup = false,
+			bank = false,
+			lootbop = false,
+			quit = false,
+			roll = false,
+			rollNoDE = false,
+			tooltip = false
 		}
 	})
 	self:RegisterChatCommand("Minutiae", "ChatCommand")
@@ -185,6 +191,19 @@ function Minutiae:OnEnable()
 					order = 6,
 					type = 'description',
 					name = 'When checked, Minutiae will bring up nameplates when entering combat.'
+				},
+				tooltip = {
+					order = 7,
+					type = 'toggle',
+					name = 'Tooltip in Combat',
+					desc = 'When checked, Minutiae will hide tooltips when you are in combat.',
+					get = 'Is',
+					set = 'Set'
+				},
+				tooltipDesc = {
+					order = 8,
+					type = 'description',
+					name = 'When checked, Minutiae will hide tooltips when you are in combat.'
 				}
 			}
 		},
@@ -257,18 +276,31 @@ function Minutiae:OnEnable()
 				bind = {
 					order = 3,
 					type = 'toggle',
-					name = 'Confirm Bind On Pickup',
-					desc = 'When checked, Minutiae will automatically confirm the Bind on Pickup Warning.',
+					name = 'Roll for Bind On Pickup items',
+					desc = 'When checked, Minutiae will automatically confirm the roll for Bind on Pickup items.',
 					get = 'Is',
 					set = 'Set'
 				},
 				bindDesc = {
 					order = 4,
 					type = 'description',
-					name = 'When checked, Minutiae will automatically confirm the Bind on Pickup Warning.'
+					name = 'When checked, Minutiae will automatically confirm the roll for Bind on Pickup items.'
+				},
+				lootbop = {
+					order = 5,
+					type = 'toggle',
+					name = 'Loot Bind On Pickup items',
+					desc = 'When checked, Minutiae will automatically loot Bind on Pickup items.',
+					get = 'Is',
+					set = 'Set'
+				},
+				lootbopDesc = {
+					order = 6,
+					type = 'description',
+					name = 'When checked, Minutiae will automatically loot Bind on Pickup items.'
 				},
 				gossip = {
-					order = 5,
+					order = 7,
 					type = 'toggle',
 					name = 'Skip Gossip',
 					desc = 'When checked, Minutiae will skip gossip text when interacting with NPCs.',
@@ -276,9 +308,62 @@ function Minutiae:OnEnable()
 					set = 'Set'
 				},
 				gossipDesc = {
-					order = 6,
+					order = 8,
 					type = 'description',
 					name = 'When checked, Minutiae will skip gossip text when interacting with NPCs.'
+				},
+				quit = {
+					order = 9,
+					type = 'toggle',
+					name = 'Force quit',
+					desc = 'When checked, Minutiae will force quit the game without waiting 20 seconds.',
+					get = 'Is',
+					set = 'Set'
+				},
+				quitDesc = {
+					order = 10,
+					type = 'description',
+					name = 'When checked, Minutiae will force quit the game without waiting 20 seconds.'
+				},
+				roll = {
+					order = 11,
+					type = 'toggle',
+					name = 'Auto roll',
+					desc = 'When checked, Minutiae will automatically roll greed or disenchant for green items.',
+					get = 'Is',
+					set = 'Set'
+				},
+				rollDesc = {
+					order = 12,
+					type = 'description',
+					name = 'When checked, Minutiae will automatically roll greed or disenchant for green items.'
+				},
+				rollNoDE = {
+					order = 13,
+					type = 'toggle',
+					name = 'Always greed',
+					desc = 'When checked, Minutiae will always roll greed for green items, not disenchant.',
+					get = 'Is',
+					set = 'Set',
+					disabled = function() return not self.db.global.roll end
+				},
+				rollNoDEDesc = {
+					order = 14,
+					type = 'description',
+					name = 'When checked, Minutiae will always roll greed for green items, not disenchant.'
+				},
+				bank = {
+					order = 15,
+					type = 'toggle',
+					name = 'Open all bags in bank',
+					desc = 'When checked, Minutiae will automatically open all bags in bank.',
+					get = 'Is',
+					set = 'Set'
+				},
+				bankDesc = {
+					order = 16,
+					type = 'description',
+					name = 'When checked, Minutiae will automatically open all bags in bank.'
 				}
 			}
 		},	
@@ -348,7 +433,7 @@ function Minutiae:Set(arg, value)
 		return
 	else
 		self.db.global[arg[2]] = value
-		if arg[2] == "startup" or arg[2] == "repairSelfless" then
+		if arg[2] == "startup" or arg[2] == "repairSelfless" or arg[2] == "rollNoDE" then
 			return
 		end
 		local module = "Minutiae"..arg[2]:gsub("^%l", string.upper)

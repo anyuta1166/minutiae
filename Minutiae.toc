@@ -41,3 +41,8 @@ Modules\Bind.lua
 Modules\Nameplates.lua
 Modules\Summon.lua
 Modules\Gossip.lua
+Modules\Bank.lua
+Modules\Lootbop.lua
+Modules\Quit.lua
+Modules\Roll.lua
+Modules\Tooltip.lua
