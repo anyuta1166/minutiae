@@ -1,4 +1,4 @@
-﻿## Interface: 40300
+﻿## Interface: 50400
 ## Title: Minutiae
 ## Notes: An Ace3 mod to automate common activities.  Inspired by the Ace2 mod Automaton - credit weab and gxxam.
 ## Author: InSo(v)nIaX
