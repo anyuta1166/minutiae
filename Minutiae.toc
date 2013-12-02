@@ -2,10 +2,10 @@
 ## Title: Minutiae
 ## Notes: An Ace3 mod to automate common activities.  Inspired by the Ace2 mod Automaton - credit weab and gxxam.
 ## Author: InSo(v)nIaX
-## Version: 1.0
+## Version: 1.1.0
 ## OptionalDeps: Ace3, CallbackHandler-1.0, LibDataBroker-1.1, LibDBIcon-1.0, LibAbacus-3.0
 ## SavedVariables: MinutiaeDB
-## X-Curse-Packaged-Version: v1.0
+## X-Curse-Packaged-Version: v1.1.0
 ## X-Curse-Project-Name: Minutiae (Automation)
 ## X-Curse-Project-ID: minutiae
 ## X-Curse-Repository-ID: wow/minutiae/mainline

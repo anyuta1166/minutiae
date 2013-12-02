@@ -1,5 +1,5 @@
 ﻿Minutiae = LibStub("AceAddon-3.0"):NewAddon("Minutiae", "AceConsole-3.0", "AceEvent-3.0")
-local MinutiaeVersion = "1.0"
+local MinutiaeVersion = "1.1.0"
 local LDB = LibStub("LibDataBroker-1.1", true)
 local LDBIcon = LDB and LibStub("LibDBIcon-1.0", true)
 
