@@ -26,7 +26,7 @@ function MinutiaeInvite:PARTY_INVITE_REQUEST(_, arg)
 		end
 	end
 	for i=1, BNGetNumFriends() do
-		local _, _, _, name = BNGetFriendInfo(i)
+		local _, _, _, _, name = BNGetFriendInfo(i)
 		if name == arg then
 			self:RegisterEvent("PARTY_MEMBERS_CHANGED")
 			AcceptGroup()
