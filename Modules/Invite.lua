@@ -23,22 +23,29 @@ end
 
 function MinutiaeInvite:PARTY_INVITE_REQUEST(_, arg)
 	for i=1, GetNumFriends() do
-		local name = GetFriendInfo(i)
-		if name == arg then
+		if GetFriendInfo(i) == arg then
 			self:ProcessInvite()
 			return
 		end
 	end
-	for i=1, BNGetNumFriends() do
-		local _, _, _, _, name = BNGetFriendInfo(i)
-		if name == arg then
-			self:ProcessInvite()
-			return
+
+	local realm = GetRealmName();
+	for i = 1, select(2, BNGetNumFriends()) do
+		for j = 1, BNGetNumFriendToons(i) do
+			local _, toonName, client, realmName = BNGetFriendToonInfo(i, j);
+			if client == "WoW" then
+				-- local fullName = toonName.."-"..gsub(realmName, " ", "")
+				local fullName = toonName.."-"..realmName
+				if (realmName == realm and toonName == arg) or fullName == arg then
+					self:ProcessInvite()
+					return
+				end
+			end
 		end
 	end
+
 	for i=1, GetNumGuildMembers() do
-		local name = GetGuildRosterInfo(i)
-		if name == arg then
+		if Ambiguate(GetGuildRosterInfo(i), "guild") == arg then
 			self:ProcessInvite()
 			return
 		end
