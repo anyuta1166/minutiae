@@ -13,6 +13,7 @@ end
 
 function MinutiaeInvite:PARTY_MEMBERS_CHANGED()
 	StaticPopup_Hide("PARTY_INVITE")
+	StaticPopup_Hide("PARTY_INVITE_XREALM")
 	self:UnregisterEvent("PARTY_MEMBERS_CHANGED")
 end
 
