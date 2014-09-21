@@ -11,21 +11,22 @@ function MinutiaeInvite:OnDisable()
 	self:UnregisterEvent("PARTY_INVITE_REQUEST")
 end
 
-function MinutiaeInvite:PARTY_MEMBERS_CHANGED()
-	StaticPopup_Hide("PARTY_INVITE")
-	StaticPopup_Hide("PARTY_INVITE_XREALM")
-	self:UnregisterEvent("PARTY_MEMBERS_CHANGED")
-end
-
-function MinutiaeInvite:ProcessInvite()
-	self:RegisterEvent("PARTY_MEMBERS_CHANGED")	
+function MinutiaeInvite:AcceptPartyInvite()
 	AcceptGroup()
+	for i=1, STATICPOPUP_NUMDIALOGS do
+		local whichDialog = _G["StaticPopup"..i].which
+		if whichDialog == "PARTY_INVITE" or whichDialog == "PARTY_INVITE_XREALM" then
+			_G["StaticPopup"..i].inviteAccepted = 1
+			StaticPopup_Hide(whichDialog)
+			break
+		end
+	end
 end
 
 function MinutiaeInvite:PARTY_INVITE_REQUEST(_, arg)
 	for i=1, GetNumFriends() do
 		if GetFriendInfo(i) == arg then
-			self:ProcessInvite()
+			self:AcceptPartyInvite()
 			return
 		end
 	end
@@ -35,10 +36,9 @@ function MinutiaeInvite:PARTY_INVITE_REQUEST(_, arg)
 		for j = 1, BNGetNumFriendToons(i) do
 			local _, toonName, client, realmName = BNGetFriendToonInfo(i, j);
 			if client == "WoW" then
-				-- local fullName = toonName.."-"..gsub(realmName, " ", "")
 				local fullName = toonName.."-"..realmName
 				if (realmName == realm and toonName == arg) or fullName == arg then
-					self:ProcessInvite()
+					self:AcceptPartyInvite()
 					return
 				end
 			end
@@ -47,7 +47,7 @@ function MinutiaeInvite:PARTY_INVITE_REQUEST(_, arg)
 
 	for i=1, GetNumGuildMembers() do
 		if Ambiguate(GetGuildRosterInfo(i), "guild") == arg then
-			self:ProcessInvite()
+			self:AcceptPartyInvite()
 			return
 		end
 	end
