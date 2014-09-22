@@ -11,8 +11,7 @@ function MinutiaeInvite:OnDisable()
 	self:UnregisterEvent("PARTY_INVITE_REQUEST")
 end
 
-function MinutiaeInvite:AcceptPartyInvite()
-	AcceptGroup()
+function MinutiaeInvite:PARTY_MEMBERS_CHANGED()
 	for i=1, STATICPOPUP_NUMDIALOGS do
 		local whichDialog = _G["StaticPopup"..i].which
 		if whichDialog == "PARTY_INVITE" or whichDialog == "PARTY_INVITE_XREALM" then
@@ -21,6 +20,12 @@ function MinutiaeInvite:AcceptPartyInvite()
 			break
 		end
 	end
+	self:UnregisterEvent("PARTY_MEMBERS_CHANGED")
+end
+
+function MinutiaeInvite:AcceptPartyInvite()
+	self:RegisterEvent("PARTY_MEMBERS_CHANGED")	
+	AcceptGroup()
 end
 
 function MinutiaeInvite:PARTY_INVITE_REQUEST(_, arg)
