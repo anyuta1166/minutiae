@@ -13,10 +13,10 @@ end
 
 function MinutiaeInvite:GROUP_ROSTER_UPDATE()
 	for i=1, STATICPOPUP_NUMDIALOGS do
-		local whichDialog = _G["StaticPopup"..i].which
-		if whichDialog == "PARTY_INVITE" or whichDialog == "PARTY_INVITE_XREALM" then
-			_G["StaticPopup"..i].inviteAccepted = 1
-			StaticPopup_Hide(whichDialog)
+		local frame = _G["StaticPopup"..i]
+		if frame:IsVisible() and (frame.which == "PARTY_INVITE" or frame.which == "PARTY_INVITE_XREALM") then
+			frame.inviteAccepted = 1
+			StaticPopup_Hide(frame.which)
 			break
 		end
 	end
