@@ -15,19 +15,25 @@ end
 function MinutiaeRepair:MERCHANT_SHOW()
 	if GetRepairAllCost() > 0 then
 		if IsInGuild() and not Minutiae.db.global.repairSelfless then
-			if GetGuildBankWithdrawMoney() > GetRepairAllCost() then
+			local withdrawLimit = GetGuildBankWithdrawMoney()
+			if withdrawLimit == -1 then
+				withdrawLimit = GetGuildBankMoney()
+			end
+			if not CanGuildBankRepair() then
+				print("|cFFFF0000Minutiae|r: Guild bank repair is not allowed")
+			elseif withdrawLimit > GetRepairAllCost() then
 				print("|cFFFF0000Minutiae|r: Repair costs: "..abacus:FormatMoneyFull(GetRepairAllCost(), true).." (Guild)")
 				RepairAllItems(1)
 				return
 			else
-				print("|cFFFF0000Minutiae|r: Repair costs: "..abacus:FormatMoneyFull(GetRepairAllCost(), true).." (Insufficient Guild Funds or Cannot Withdraw)")
+				print("|cFFFF0000Minutiae|r: Repair costs: "..abacus:FormatMoneyFull(GetRepairAllCost(), true).." (Insufficient guild funds or cannot withdraw)")
 			end
-	end
+		end
 		if GetRepairAllCost() > 0 and GetMoney() > GetRepairAllCost() then
 			print("|cFFFF0000Minutiae|r: Repair costs: "..abacus:FormatMoneyFull(GetRepairAllCost(), true).." (Repaired)")
 			RepairAllItems()
 		else
-			print("|cFFFF0000Minutiae|r: Repair costs: "..abacus:FormatMoneyFull(GetRepairAllCost(), true).." (Insufficient Funds)")
+			print("|cFFFF0000Minutiae|r: Repair costs: "..abacus:FormatMoneyFull(GetRepairAllCost(), true).." (Insufficient funds)")
 		end
 	end
 end
