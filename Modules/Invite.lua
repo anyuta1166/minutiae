@@ -36,13 +36,12 @@ function MinutiaeInvite:PARTY_INVITE_REQUEST(_, arg)
 		end
 	end
 
-	local realm = GetRealmName();
+	local realm = gsub(GetRealmName(), " ", "");
 	for i = 1, select(2, BNGetNumFriends()) do
-		for j = 1, BNGetNumFriendToons(i) do
-			local _, toonName, client, realmName = BNGetFriendToonInfo(i, j);
+		for j = 1, BNGetNumFriendGameAccounts(i) do
+			local _, toonName, client, realmName = BNGetFriendGameAccountInfo(i, j);
 			if client == "WoW" then
-				local fullName = toonName.."-"..gsub(realmName, " ", "")
-				-- local fullName = toonName.."-"..realmName
+				local fullName = toonName.."-"..realmName
 				if (realmName == realm and toonName == arg) or fullName == arg then
 					self:AcceptPartyInvite()
 					return
